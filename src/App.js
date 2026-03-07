@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AuthPage from "./components/AuthPage";
+import FeedPage from "./components/FeedPage";
+import Sidebar from "./components/Sidebar";
+import CreatePostPage from "./components/CreatePostPage";
+import FriendsPage from "./components/FriendsPage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {storedUser ? (
+        <div style={{ display: "flex" }}>
+          <Sidebar user={storedUser} />
+          <div style={styles.content}>
+            <Routes>
+              <Route path="/feed" element={<FeedPage user={storedUser} />} />
+              <Route path="/create-post" element={<CreatePostPage user={storedUser} />} />
+              <Route path="/friends" element={<FriendsPage />} />
+              <Route path="/search" element={<SearchPage />} />
+            </Routes>
+          </div>
+        </div>
+      ) : (
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
+        </Routes>
+      )}
+    </Router>
   );
 }
+
+const styles = {
+  content: {
+    marginLeft: "220px",
+    flex: 1,
+    padding: "30px",
+    background: "#f9f9f9",
+    minHeight: "100vh"
+  }
+};
 
 export default App;
