@@ -68,6 +68,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user;
+    }
+
     // Get User By Id
     public User getUser(Long userId) {
         return userRepository.findById(userId)

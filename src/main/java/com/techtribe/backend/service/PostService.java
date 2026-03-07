@@ -48,4 +48,9 @@ public class PostService {
 
         return postRepo.findByUser(user);
     }
+
+    public List<Post> searchPosts(String keyword) {
+        return postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword, keyword);
+    }
+
 }

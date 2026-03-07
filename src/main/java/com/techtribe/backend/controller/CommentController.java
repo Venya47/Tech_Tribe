@@ -6,6 +6,7 @@ import com.techtribe.backend.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/comments")
 public class CommentController {
 

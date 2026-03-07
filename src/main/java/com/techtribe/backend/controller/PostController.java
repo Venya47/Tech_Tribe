@@ -5,6 +5,7 @@ import com.techtribe.backend.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/posts")
 public class PostController {
 
@@ -34,6 +35,10 @@ public class PostController {
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable Long id) {
         return postService.getPostById(id);
+    }
+    @GetMapping("/search")
+    public List<Post> searchPosts(@RequestParam String keyword) {
+        return postService.searchPosts(keyword);
     }
 
     // Get Posts By User

@@ -1,12 +1,14 @@
 package com.techtribe.backend.controller;
 
-import com.techtribe.backend.entity.User;
+import com.techtribe.backend.entity.*;
+import com.techtribe.backend.entity.UserRegisterDto;
 import com.techtribe.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -15,13 +17,14 @@ public class UserController {
     // 🔹 Register User
     @PostMapping("/register")
     public User register(
-            @RequestParam String username,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String technology
-    ) {
-        return userService.register(username, email, password, technology);
+            @RequestBody UserRegisterDto u) {
+        return userService.register(u.getUsername(), u.getEmail(), u.getPassword(), u.getTechnology());
     }
+    @PostMapping("/login")
+    public User login(@RequestBody UserLoginDto dto) {
+        return userService.login(dto.getEmail(), dto.getPassword());
+    }
+
 
     // 🔹 Change Technology
     @PutMapping("/{userId}/change-technology")
@@ -38,3 +41,4 @@ public class UserController {
         return userService.getUser(userId);
     }
 }
+

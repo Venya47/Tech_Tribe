@@ -1,6 +1,9 @@
 package com.techtribe.backend.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,4 +30,5 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "technology_id")
     private Technology technology;
+
 }
