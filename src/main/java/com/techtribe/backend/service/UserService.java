@@ -48,7 +48,7 @@ public class UserService {
     }
 
     // Change Technology
-    public User changeTechnology(Long userId, String newTechName) {
+    public User updateUserTechnology(Long userId, String newTechName) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));

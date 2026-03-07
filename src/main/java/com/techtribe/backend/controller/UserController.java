@@ -27,12 +27,16 @@ public class UserController {
 
 
     //Change Technology
-    @PutMapping("/{userId}/change-technology")
-    public User changeTechnology(
-            @PathVariable Long userId,
-            @RequestBody String technology
-    ) {
-        return userService.changeTechnology(userId, technology);
+    //@PutMapping("/{userId}/change-technology")
+//    public User changeTechnology(
+//            @PathVariable Long userId,
+//            @RequestBody String technology
+//    ) {
+//        return userService.changeTechnology(userId, technology);
+//    }
+    @PutMapping("/{userId}/technology")
+    public User updateTechnology(@PathVariable Long userId, @RequestParam String techName) {
+        return userService.updateUserTechnology(userId, techName);
     }
 
     //Get User By ID
