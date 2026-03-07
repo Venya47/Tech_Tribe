@@ -9,6 +9,8 @@ import com.techtribe.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -83,5 +85,13 @@ public class UserService {
     public User getUser(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+    //get all users
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    //get users from same technology
+    public List<User> getAllUsersByTech(Long techId) {
+        return userRepository.findByTechnologyId(techId);
     }
 }

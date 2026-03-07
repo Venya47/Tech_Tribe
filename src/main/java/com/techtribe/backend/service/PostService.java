@@ -25,13 +25,13 @@ public class PostService {
         post.setTitle(title);
         post.setContent(content);
         post.setUser(user);
-
+        post.setComments(new ArrayList<>());
         return postRepo.save(post);
     }
 
-    // Get All Posts
-    public List<Post> getAllPosts() {
-        return postRepo.findAll();
+    // Get All Posts in same technology
+    public List<Post> getAllPosts(Long id) {
+        return postRepo.findByUser_Technology_Id(id);
     }
 
     // Get Post By Id

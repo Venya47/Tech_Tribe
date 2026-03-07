@@ -6,5 +6,6 @@ import java.util.*;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByUser(User user);
+    List<Post> findByUser_Technology_Id(Long techId);
     List<Post> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String title, String content);
 }

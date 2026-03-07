@@ -1,10 +1,11 @@
 package com.techtribe.backend.controller;
 
 import com.techtribe.backend.entity.*;
-import com.techtribe.backend.entity.UserRegisterDto;
 import com.techtribe.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-
-    // 🔹 Register User
+    //Register User
     @PostMapping("/register")
     public User register(
             @RequestBody UserRegisterDto u) {
@@ -26,19 +26,24 @@ public class UserController {
     }
 
 
-    // 🔹 Change Technology
+    //Change Technology
     @PutMapping("/{userId}/change-technology")
     public User changeTechnology(
             @PathVariable Long userId,
-            @RequestParam String technology
+            @RequestBody String technology
     ) {
         return userService.changeTechnology(userId, technology);
     }
 
-    // 🔹 Get User By ID
+    //Get User By ID
     @GetMapping("/{userId}")
     public User getUser(@PathVariable Long userId) {
         return userService.getUser(userId);
+    }
+    // get all users in same tech
+    @GetMapping("/friends/{techId}")
+    public List<User> getAllUsers(@PathVariable Long techId) {
+        return userService.getAllUsersByTech(techId);
     }
 }
 

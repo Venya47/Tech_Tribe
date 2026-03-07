@@ -1,6 +1,10 @@
 package com.techtribe.backend.controller;
+import com.techtribe.backend.entity.DTOMapper;
 import com.techtribe.backend.entity.Post;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import com.techtribe.backend.entity.PostDTO;
 import com.techtribe.backend.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,16 +29,20 @@ public class PostController {
         return postService.createPost(userId, title, content);
     }
 
-    // Get All Posts
-    @GetMapping
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    // Get All Posts from same tech
+    @GetMapping("/{techId}")
+    public List<PostDTO> getAllPosts(@PathVariable Long techId) {
+        List<Post> posts = postService.getAllPosts(techId);
+        return posts.stream()
+                .map(DTOMapper::toPostDTO)
+                .collect(Collectors.toList());
     }
 
+
     // Get Post By Id
-    @GetMapping("/{id}")
-    public Post getPostById(@PathVariable Long id) {
-        return postService.getPostById(id);
+    @GetMapping("/post/{pid}")
+    public Post getPostById(@PathVariable Long pid) {
+        return postService.getPostById(pid);
     }
     @GetMapping("/search")
     public List<Post> searchPosts(@RequestParam String keyword) {
