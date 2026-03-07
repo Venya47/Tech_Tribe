@@ -18,7 +18,7 @@ function App() {
             <Routes>
               <Route path="/feed" element={<FeedPage user={storedUser} />} />
               <Route path="/create-post" element={<CreatePostPage user={storedUser} />} />
-              <Route path="/friends" element={<FriendsPage />} />
+              <Route path="/friends" element={<FriendsPage user={storedUser} />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </div>
