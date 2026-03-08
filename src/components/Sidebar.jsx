@@ -1,24 +1,25 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ProfileSection from "./ProfileSection";
+import React, { useState } from "react";
 
-function Sidebar({ user }) {
+
+function Sidebar({ user , setUser }) {
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.removeItem("user");
+    setUser(null);
     navigate("/");
   };
 
   return (
     <div style={styles.sidebar}>
       <h2 style={styles.logo}>TechTribe</h2>
-
       {/* Profile section */}
       <div style={styles.profile}>
         <p style={styles.username}>👤 {user?.username}</p>
         <p style={styles.tech}>{user?.technology?.name} Community</p>
       </div>
-
+      <ProfileSection user={user} setUser={setUser} />
       <nav style={styles.nav}>
         <Link to="/feed" style={styles.link}>📜 Feed</Link>
         <Link to="/create-post" style={styles.link}>✍️ Create Post</Link>
@@ -69,7 +70,7 @@ const styles = {
     gap: "15px"
   },
   link: {
-    color: "#fff",
+    color: "#f0faf4",
     textDecoration: "none",
     fontSize: "16px",
     padding: "10px",
@@ -82,7 +83,7 @@ const styles = {
     background: "#ff4d4d",
     border: "none",
     borderRadius: "6px",
-    color: "#fff",
+    color: "#e9adad",
     cursor: "pointer",
     transition: "background 0.3s, transform 0.2s"
   }

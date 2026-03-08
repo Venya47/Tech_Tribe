@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+
 import AuthPage from "./components/AuthPage";
 import FeedPage from "./components/FeedPage";
 import Sidebar from "./components/Sidebar";
@@ -8,17 +10,18 @@ import SearchPage from "./components/SearchPage";
 
 function App() {
   const storedUser = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(storedUser);
 
   return (
     <Router>
       {storedUser ? (
         <div style={{ display: "flex" }}>
-          <Sidebar user={storedUser} />
+          <Sidebar user={user} setUser={setUser}  />
           <div style={styles.content}>
             <Routes>
-              <Route path="/feed" element={<FeedPage user={storedUser} />} />
-              <Route path="/create-post" element={<CreatePostPage user={storedUser} />} />
-              <Route path="/friends" element={<FriendsPage user={storedUser} />} />
+              <Route path="/feed" element={<FeedPage user={user} />} />
+              <Route path="/create-post" element={<CreatePostPage user={user} />} />
+              <Route path="/friends" element={<FriendsPage user={user} />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </div>
