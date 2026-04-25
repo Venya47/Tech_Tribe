@@ -36,6 +36,13 @@ public class PostController {
         return posts.stream()
                 .map(DTOMapper::toPostDTO)
                 .collect(Collectors.toList());
+    }// Get All Posts from same tech
+    @GetMapping("/my/{userId}")
+    public List<PostDTO> getUserPosts(@PathVariable Long userId) {
+        List<Post> posts = postService.getPostsByUser(userId);
+        return posts.stream()
+                .map(DTOMapper::toPostDTO)
+                .collect(Collectors.toList());
     }
 
 
@@ -53,5 +60,10 @@ public class PostController {
     @GetMapping("/user/{userId}")
     public List<Post> getPostsByUser(@PathVariable Long userId) {
         return postService.getPostsByUser(userId);
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
     }
 }

@@ -53,4 +53,8 @@ public class PostService {
         return postRepo.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword, keyword);
     }
 
+    public void deletePost(Long postId) {
+        postRepo.deleteById(postId);
+    }
+
 }
