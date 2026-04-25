@@ -25,6 +25,7 @@ function Sidebar({ user , setUser }) {
         <Link to="/create-post" style={styles.link}>✍️ Create Post</Link>
         <Link to="/friends" style={styles.link}>👥 Friends</Link>
         <Link to="/search" style={styles.link}>🔍 Search Posts</Link>
+        <Link to="/my-posts" style={styles.link}> My Posts</Link>
         <button onClick={handleLogout} style={styles.logout}>🚪 Logout</button>
       </nav>
     </div>

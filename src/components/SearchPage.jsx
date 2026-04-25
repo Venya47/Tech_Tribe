@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SearchPage() {
+function SearchPage({user}) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);

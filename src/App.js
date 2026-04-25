@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import AuthPage from "./components/AuthPage";
 import FeedPage from "./components/FeedPage";
+import MyPostsPage from "./components/MyPostsPage";
 import Sidebar from "./components/Sidebar";
 import CreatePostPage from "./components/CreatePostPage";
 import FriendsPage from "./components/FriendsPage";
@@ -22,7 +23,8 @@ function App() {
               <Route path="/feed" element={<FeedPage user={user} />} />
               <Route path="/create-post" element={<CreatePostPage user={user} />} />
               <Route path="/friends" element={<FriendsPage user={user} />} />
-              <Route path="/search" element={<SearchPage />} />
+              <Route path="/search" element={<SearchPage user={user} />} />
+              <Route path="/my-posts" element={<MyPostsPage user={user} />} />
             </Routes>
           </div>
         </div>
